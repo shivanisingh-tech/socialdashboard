@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Welcome to Social Dashboard</h1>
+<div class="stats">
+    <p><strong>Followers:</strong> <span id="followers">Loading...</span></p>
+    <p><strong>Tweets:</strong> <span id="tweets">Loading...</span></p>
+</div>
+
+<script>
+    // Call API to get Twitter stats
+    fetch('/twitter-stats')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('followers').textContent = data.followers;
+            document.getElementById('tweets').textContent = data.tweets;
+        })
+        .catch(error => {
+            document.getElementById('followers').textContent = "Error";
+            document.getElementById('tweets').textContent = "Error";
+            console.error("Error fetching stats:", error);
+        });
+</script>
+</body>
+</html>
+
